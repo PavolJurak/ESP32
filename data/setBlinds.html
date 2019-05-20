@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom.css">
+    <script src="myscripts.js"></script>
+    <title>ESP32</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="/">ESP32 HUB</a>
+        </div>
+        <ul class="navbar-nav">
+            <li class="nav-item"><a href="/" class="nav-link">CONTROL</a></li>
+            <li class="nav-item"><a href="/setlwallswitch" class="nav-link">SETTING WALL SWITCH</a></li>
+            <li class="nav-item"><a href="/setblinds" class="nav-link active">CALIBRATION BLINDS</a></li>
+            <li class="nav-item"><a href="/task" class="nav-link">TASK MANAGER</a></li>
+            <li class="nav-item"><a href="/firmware" class="nav-link">UPLOAD FIRMWARE</a></li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="text-md-center alert" id="message-div">
+        <p id="message"></p>
+    </div>
+    <div class="row">
+      <div class="card card1 col-md-6">
+        <div class="card-body">
+          <h4 class="card-title text-md-center">Send calibration command</h4>
+          <table class="table-custom text-md-center">
+            <tbody>
+              <tr>
+                <td class="text-md-left">Choose blind</td>
+                <td>
+                  <select class="form-control" name="">
+                    <option value="">Left blind</option>
+                    <option value="">Right blind</option>
+                    <option value="">All blinds</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-md-left">Value</td>
+                <td>
+                  <input type="text" class="form-control" id="blindValue" placeholder="5 - 175">
+                </td>
+              </tr>
+              <tr>
+                <td class="text-md-left">Action</td>
+                <td>
+                  <select class="form-control" name="">
+                    <option value="">Move</option>
+                    <option value="S_CS">Save - CloseSun</option>
+                    <option value="S_CN">Save - CloseNight</option>
+                    <option value="S_OL">Save - OpenLow</option>
+                    <option value="S_OM">Save - OpenMiddle</option>
+                    <option value="S_OH">Save - OpenHight</option>
+                  </select>
+                </td>
+              </tr>
+              <tr>
+                <td></td>
+                <td>
+                  <input type="button" value="SEND" class="btn btn-success btn-full-width">
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card card1 col-md-6">
+        <div class="card-body">
+          <h4 class="card-title text-md-center">EEPROM values</h4>
+          <table class="table-custom text-md-center">
+            <tbody>
+                <tr>
+                  <td class="text-md-left">CloseSun</td>
+                  <td><input type="text" class="form-control" id="vCloseSun" value="%vCloseSun%"></td>
+                </tr>
+                <tr>
+                  <td class="text-md-left">CloseNight</td>
+                  <td><input type="text" class="form-control" id="vCloseNight" value="%vCloseNight%"></td>
+                </tr>
+                <tr>
+                  <td class="text-md-left">OpenLow</td>
+                  <td><input type="text" class="form-control" id="vOpenLow" value="%vOpenLow%"></td>
+                </tr>
+                <tr>
+                  <td class="text-md-left">OpenMiddle</td>
+                  <td><input type="text" class="form-control" id="vOpenMiddle" value="%OpenMiddle%"></td>
+                </tr>
+                <tr>
+                  <td class="text-md-left">OpenHight</td>
+                  <td><input type="text" class="form-control" id="vOpenHight" value="%vOpenHight%"></td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>
+                    <input type="button" value="REFRESH" class="btn btn-success btn-full-width">
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+</div>
+</body>
+</html>

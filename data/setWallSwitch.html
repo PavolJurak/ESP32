@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom.css">
+    <script src="myscripts.js"></script>
+    <title>ESP32</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">ESP32 HUB</a>
+          </div>
+          <ul class="navbar-nav">
+              <li class="nav-item"><a href="/" class="nav-link">CONTROL</a></li>
+              <li class="nav-item"><a href="/setlwallswitch" class="nav-link active">SETTING WALL SWITCH</a></li>
+              <li class="nav-item"><a href="/setblinds" class="nav-link">CALIBRATION BLINDS</a></li>
+              <li class="nav-item"><a href="/task" class="nav-link">TASK MANAGER</a></li>
+              <li class="nav-item"><a href="/firmware" class="nav-link">UPLOAD FIRMWARE</a></li>
+          </ul>
+      </div>
+  </nav>
+<div class="container">
+    <div class="row">
+        <div class="card card1 col-md-6">
+            <div class="card-body">
+                <h3 class="card-title text-md-center">Setting wall switch</h3>
+                <table class="tabble-custom">
+                    <tr>
+                        <td colspan="2"><h5>Radio code transmitter</h5></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text" class="form-control" placeholder="code" name="radio_code" id="radio_code"></td>
+                        <td><input type="button" value="SEND" class="btn btn-success btn-full-width"></td>
+                    </tr>
+                </table>
+                <div id="manual">
+                    <h4 class="card-title">Smart Switch - remote control pairing</h4>
+                    <div class="manual-title text-md-left">
+                        1. How to use a button to turn it ON & OFF?
+                    </div>
+                    <div class="manual-description text-md-left">
+                        Press the touch button for few seconds when rings one beep and
+                        then press remote any key, power ON and OFF control can be realized.
+                    </div>
+                    <div class="manual-title text-md-left">
+                        2. How to use a button to turn it ON?
+                    </div>
+                    <div class="manual-description text-md-left">
+                        Press the touch button for few seconds when rings two beeps, and
+                        then press remote any key, power ON control can be realized.
+                    </div>
+                    <div class="manual-title text-md-left">
+                        3. How to use a button to turn it OFF?
+                    </div>
+                    <div class="manual-description text-md-left">
+                        Press the touch button for few seconds when rings three beeps, and
+                        then press remote any key, power ON control can be realized.
+                    </div>
+                    <div class="manual-title text-md-left">
+                        4. How clean up the code?
+                    </div>
+                    <div class="manual-description text-md-left">
+                        Press the touch button for few seconds when rings four beeps.
+                        The code will be cleared.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

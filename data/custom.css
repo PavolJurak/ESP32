@@ -1,0 +1,57 @@
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+.card1 {
+    margin-top: 25px;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.btn-full-width {
+    width: 100%;
+}
+
+
+.table-custom {
+    margin-top: 20px;
+    width: 100%;
+    border-top: 1px solid #dee2e6;
+}
+
+.table-custom td {
+    padding: 5px;
+}
+
+.table-custom tr:first-child td {
+    padding-top: 20px;
+}
+
+.table-custom tbody {
+    margin-bottom: 10px;
+}
+
+#LeftBlind {
+    width: 100%;
+}
+
+#RightBlind {
+    width: 100%;
+}
+
+.alert {
+    padding: 0px 0px;
+    margin: 0;
+    height: 25px;
+}
+
+#manual {
+    margin-top: 30px;
+}
+
+.manual-title {
+	font-size: 1.2rem;
+	margin-top: 10px;
+}
