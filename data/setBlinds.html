@@ -36,7 +36,7 @@
               <tr>
                 <td class="text-md-left">Choose blind</td>
                 <td>
-                  <select class="form-control" name="">
+                  <select class="form-control" id="selectBlind">
                     <option value="">Left blind</option>
                     <option value="">Right blind</option>
                     <option value="">All blinds</option>
@@ -52,8 +52,8 @@
               <tr>
                 <td class="text-md-left">Action</td>
                 <td>
-                  <select class="form-control" name="">
-                    <option value="">Move</option>
+                  <select class="form-control" id="selectAction">
+                    <option value="M">Move</option>
                     <option value="S_CS">Save - CloseSun</option>
                     <option value="S_CN">Save - CloseNight</option>
                     <option value="S_OL">Save - OpenLow</option>
@@ -65,7 +65,7 @@
               <tr>
                 <td></td>
                 <td>
-                  <input type="button" value="SEND" class="btn btn-success btn-full-width">
+                  <input type="button" value="SEND" class="btn btn-success btn-full-width" onclick="sendCalibrationRequest();">
                 </td>
               </tr>
             </tbody>
@@ -102,7 +102,7 @@
                 <tr>
                   <td></td>
                   <td>
-                    <input type="button" value="REFRESH" class="btn btn-success btn-full-width">
+                    <input type="button" value="REFRESH" class="btn btn-success btn-full-width" onclick="refreshEepromValues('eeprom/values');">
                   </td>
                 </tr>
             </tbody>

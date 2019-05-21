@@ -24,6 +24,9 @@
       </div>
   </nav>
 <div class="container">
+    <div class="text-md-center alert" id="message-div">
+        <p id="message"></p>
+    </div>
     <div class="row">
         <div class="card card1 col-md-6">
             <div class="card-body">
@@ -33,8 +36,8 @@
                         <td colspan="2"><h5>Radio code transmitter</h5></td>
                     </tr>
                     <tr>
-                        <td><input type="text" class="form-control" placeholder="code" name="radio_code" id="radio_code"></td>
-                        <td><input type="button" value="SEND" class="btn btn-success btn-full-width"></td>
+                        <td><input type="text" class="form-control" placeholder="max length 5 chars" name="radio_code" value="" id="radio_code"></td>
+                        <td><input type="button" value="SEND" class="btn btn-success btn-full-width" onclick="doRequest('control/radio?code='+radio_code.value);"></td>
                     </tr>
                 </table>
                 <div id="manual">

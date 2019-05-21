@@ -223,6 +223,25 @@ void startWebServer()
     request->send(200, "text/plain", "OK");
   });
 
+  server.on("/control/blind/calibration", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(200, "text/plain", "OK");
+  });
+
+  server.on("/control/radio", HTTP_GET, [](AsyncWebServerRequest *request){
+    if (request->hasParam("code")) {
+      AsyncWebParameter* p = request->getParam("code");
+      String radio_code = p->value();
+      if (radio_code.length() <= 5) {
+        radio433.send(radio_code.toInt(), 24);
+      };
+    }
+    request->send(200, "text/plain", "OK");
+  });
+
+  server.on("/eeprom/values", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(200, "application/json", getJsonEepromValues());
+  });
+
   server.on("/eeprom/default/set", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(200, "text/plain", "Inic EEPROM was succesfull");
     eeprom_inic();

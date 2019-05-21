@@ -28,6 +28,45 @@ function addMessage(text, type) {
 
 }
 
+function sendCalibrationRequest() {
+  var baseUrl = 'control/blind/calibration?';
+  var blind = document.getElementById("selectBlind").value;
+  var value = document.getElementById("blindValue").value;
+  var action = document.getElementById("selectAction").value;
+}
+
+function refreshEepromValues(url) {
+  if (url != null) {
+      if (window.ActiveXObject) {
+          httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+      } else {
+          httpRequest = new XMLHttpRequest();
+      }
+
+      httpRequest.open("GET", url, true)
+
+      httpRequest.onload = function () {
+          var code = httpRequest.status;
+          if (this.readyState == 4 && this.status == 200) {
+              addMessage("REFRESH SUCCESFULL", "succesfull");
+              var data = JSON.parse(this.responseText);
+              document.getElementById("vCloseSun").innerHTML = data.CloseSun;
+              document.getElementById("vCloseNight").innerHTML = data.CloseNight;
+              document.getElementById("vOpenLow").innerHTML = data.OpenLow;
+              document.getElementById("vOpenMiddle").innerHTML = data.OpenMiddle;
+              document.getElementById("vOpenHight").innerHTML = data.OpenHight;
+          }
+          if (this.status != 200) {
+              addMessage("<strong>Error:</strong> request with status code " + code, "error");
+          }
+          console.log("Done", code);
+      }
+
+      httpRequest.send(null);
+  } else {
+      alert("Url is empty");
+  }
+}
 
 
 function getBlindsPosition() {
