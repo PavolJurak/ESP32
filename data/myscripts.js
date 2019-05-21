@@ -50,11 +50,11 @@ function refreshEepromValues(url) {
           if (this.readyState == 4 && this.status == 200) {
               addMessage("REFRESH SUCCESFULL", "succesfull");
               var data = JSON.parse(this.responseText);
-              document.getElementById("vCloseSun").innerHTML = data.CloseSun;
-              document.getElementById("vCloseNight").innerHTML = data.CloseNight;
-              document.getElementById("vOpenLow").innerHTML = data.OpenLow;
-              document.getElementById("vOpenMiddle").innerHTML = data.OpenMiddle;
-              document.getElementById("vOpenHight").innerHTML = data.OpenHight;
+              document.getElementById("vCloseSun").value = data.CloseSun;
+              document.getElementById("vCloseNight").value = data.CloseNight;
+              document.getElementById("vOpenLow").value = data.OpenLow;
+              document.getElementById("vOpenMiddle").value = data.OpenMiddle;
+              document.getElementById("vOpenHight").value = data.OpenHight;
           }
           if (this.status != 200) {
               addMessage("<strong>Error:</strong> request with status code " + code, "error");

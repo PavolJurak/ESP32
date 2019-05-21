@@ -107,11 +107,11 @@ void saveOpenNightAngle(byte angle)
 String getJsonEepromValues()
 {
   String json = "{";
-  json += '"CloseSun":' + '"' + loadCloseSunAngle() + '",';
-  json += '"CloseNight":' + '"' + loadCloseNightAngle() + '",';
-  json += '"OpenLow":' + '"' + loadOpenHightAngle() + '",';
-  json += '"OpenMiddle":' + '"' + loadOpenMiddleAngle() + '",';
-  json += '"OpenHight":' + '"' + loadOpenHightAngle() + '"';
+  json += "\"CloseSun\":\"" + String(loadCloseSunAngle()) + "\",";
+  json += "\"CloseNight\":\"" + String(loadCloseNightAngle()) + "\",";
+  json += "\"OpenLow\":\"" + String(loadOpenHightAngle()) + "\",";
+  json += "\"OpenMiddle\":\"" + String(loadOpenMiddleAngle()) + "\",";
+  json += "\"OpenHight\":\"" + String(loadOpenHightAngle()) + "\"";
   json += "}";
   return json;
 }
