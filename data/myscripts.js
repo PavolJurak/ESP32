@@ -78,8 +78,7 @@ function refreshEepromValues() {
     document.getElementById("vOpenLow").value = data.OpenLow;
     document.getElementById("vOpenMiddle").value = data.OpenMiddle;
     document.getElementById("vOpenHight").value = data.OpenHight;
-  }
-  if (data == "") {
+  } else {
     addMessage("<strong>Error:</strong> eeprom data are empty");
   }
 }

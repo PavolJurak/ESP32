@@ -11,20 +11,21 @@
 #include <servo_functions.h>
 
 struct Light {
-  char name[17];
+  char name[20];
+  char fauxmo_name[20];
   unsigned int on_code;
   unsigned int off_code;
   boolean action;
   boolean power;
 };
 
-Light light1 = {"Light1", LIGHT_1_ON, LIGHT_1_OFF, false, false};
-Light light2 = {"Light2", LIGHT_2_ON, LIGHT_2_OFF, false, false};
-Light light3 = {"Light3", LIGHT_3_ON, LIGHT_3_OFF, false, false};
-Light light4 = {"Light4", LIGHT_4_ON, LIGHT_4_OFF, false, false};
-Light light5 = {"Light5", LIGHT_5_ON, LIGHT_5_OFF, false, false};
-Light light6 = {"Light6", LIGHT_6_ON, LIGHT_6_OFF, false, false};
-Light light7 = {"AllBedroomLights", ALL_LIGHTS_BEDROOM_ON, ALL_LIGHTS_BEDROOM_OFF, false, false};
+Light light1 = {"Light1", "light one", LIGHT_1_ON, LIGHT_1_OFF, false, false};
+Light light2 = {"Light2", "light two", LIGHT_2_ON, LIGHT_2_OFF, false, false};
+Light light3 = {"Light3", "light three", LIGHT_3_ON, LIGHT_3_OFF, false, false};
+Light light4 = {"Light4", "light four", LIGHT_4_ON, LIGHT_4_OFF, false, false};
+Light light5 = {"Light5", "light five", LIGHT_5_ON, LIGHT_5_OFF, false, false};
+Light light6 = {"Light6", "light six", LIGHT_6_ON, LIGHT_6_OFF, false, false};
+Light light7 = {"AllBedroomLights", "bedroom", ALL_LIGHTS_BEDROOM_ON, ALL_LIGHTS_BEDROOM_OFF, false, false};
 
 Light lights[] = {light1, light2, light3, light4, light5, light6, light7};
 int sizeArrayLights = sizeof(lights)/sizeof(Light);
@@ -137,36 +138,37 @@ void blindControler(String blind, byte value, String action) {
 }
 
 // Replaces placeholder with LED state value
-String processorSetBlinds(const String& var){
-  if (var == "vLeftBlindPosition") {
-    String value = (String)loadLeftBlindAngle();
-    return value;
-  }
-  if (var == "vRightBlindPosition") {
-    String value = (String)loadRightBlindAngle();
-    return value;
-  }
-  if(var == "vCloseSun") {
-    String value = (String)loadCloseSunAngle();
-    return value;
-  }
-  if(var == "vCloseNight"){
-    String value = (String)loadCloseNightAngle();
-    return value;
-  }
-  if(var == "vOpenLow") {
-    String value = (String)loadOpenLowtAngle();
-    return value;
-  }
-  if(var == "OpenMiddle") {
-    String value = (String)loadOpenMiddleAngle();
-    return value;
-  }
-  if(var == "vOpenHight") {
-    String value = (String)loadOpenHightAngle();
-    return value;
-  }
-  return String();
+String processorSetBlinds(const String& var)
+{
+    if (var == "vLeftBlindPosition") {
+      String value = (String)loadLeftBlindAngle();
+      return value;
+    }
+    if (var == "vRightBlindPosition") {
+      String value = (String)loadRightBlindAngle();
+      return value;
+    }
+    if(var == "vCloseSun") {
+      String value = (String)loadCloseSunAngle();
+      return value;
+    }
+    if(var == "vCloseNight") {
+      String value = (String)loadCloseNightAngle();
+      return value;
+    }
+    if(var == "vOpenLow") {
+      String value = (String)loadOpenLowtAngle();
+      return value;
+    }
+    if(var == "vOpenMiddle") {
+      String value = (String)loadOpenMiddleAngle();
+      return value;
+    }
+    if(var == "vOpenHight") {
+      String value = (String)loadOpenHightAngle();
+      return value;
+    }
+    return String();
 }
 
 void startWebServer()
