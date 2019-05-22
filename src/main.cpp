@@ -263,8 +263,14 @@ void startWebServer()
     request->send(200, "text/plain", "OK");
   });
 
-  server.on("/control/blind/calibration", HTTP_GET, [](AsyncWebServerRequest *request){
-    Serial.println("AHOJ");
+  server.on("/control/calibration", HTTP_GET, [](AsyncWebServerRequest *request){
+    if (request->hasParam("blind") && request->hasParam("value") && request->hasParam("action")) {
+      AsyncWebParameter* pBlind = request->getParam("blind");
+      AsyncWebParameter* pValue = request->getParam("value");
+      AsyncWebParameter* pAction = request->getParam("action");
+
+      blindControler(pBlind->value(), byte(pValue->value().toInt()), pAction->value());
+    }
     request->send(200, "text/plain", "OK");
   });
 

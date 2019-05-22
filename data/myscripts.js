@@ -35,7 +35,7 @@ function sendCalibrationRequest() {
   var action = document.getElementById("selectAction").value;
 
   if (value != "") {
-    var url = '/control/blind/calibration?blind=' + blind + '&value=' + value + '&action=' + action;
+    var url = '/control/calibration?blind=' + blind + '&value=' + value + '&action=' + action;
     doRequest(url);
   } else {
     addMessage("Value is empty!", "error");
