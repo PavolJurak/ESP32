@@ -46,6 +46,32 @@ function sendCalibrationRequest() {
 function getEepromValues() {
 
   var url = 'eeprom/values';
+  var jsonData = "";
+  if (window.ActiveXObject) {
+      httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+  } else {
+      httpRequest = new XMLHttpRequest();
+  }
+  httpRequest.open("GET", url, true);
+
+  httpRequest.onload = function () {
+      if (this.readyState == 4 && this.status == 200) {
+          addMessage("REFRESH SUCCESFULL", "succesfull");
+          jsonData = this.responseText;
+          console.log("Done", this.status);
+      }
+      if (this.status != 200) {
+          addMessage("<strong>Error:</strong> request with status code " + code, "error");
+      }
+      return jsonData;
+  }
+  httpRequest.send(null);
+
+}
+
+function refreshEepromValues() {
+  var url = 'eeprom/values';
+
   if (window.ActiveXObject) {
       httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
   } else {
@@ -57,30 +83,22 @@ function getEepromValues() {
       if (this.readyState == 4 && this.status == 200) {
           addMessage("REFRESH SUCCESFULL", "succesfull");
           var data = this.responseText;
-          console.log("Done", code);
-          return data;
+          var jsonData = JSON.parse(data);
+          document.getElementById("vLeftBlindPosition").value = jsonData.LeftBlindPosition;
+          document.getElementById("vRightBlindPosition").value = jsonData.RightBlindPosition;
+          document.getElementById("vCloseSun").value = jsonData.CloseSun;
+          document.getElementById("vCloseNight").value = jsonData.CloseNight;
+          document.getElementById("vOpenLow").value = jsonData.OpenLow;
+          document.getElementById("vOpenMiddle").value = jsonData.OpenMiddle;
+          document.getElementById("vOpenHight").value = jsonData.OpenHight;
+          console.log("Done", this.status);
       }
       if (this.status != 200) {
-          addMessage("<strong>Error:</strong> request with status code " + code, "error");
+          addMessage("<strong>Error:</strong> request with status code " + this.status + "error");
       }
+      return jsonData;
   }
   httpRequest.send(null);
-
-}
-
-function refreshEepromValues() {
-  var data = JSON.parse(getEepromValues());
-  if (data != "") {
-    document.getElementById("vLeftBlindPosition").value = data.LeftBlindPosition;
-    document.getElementById("vRightBlindPosition").value = data.RightBlindPosition;
-    document.getElementById("vCloseSun").value = data.CloseSun;
-    document.getElementById("vCloseNight").value = data.CloseNight;
-    document.getElementById("vOpenLow").value = data.OpenLow;
-    document.getElementById("vOpenMiddle").value = data.OpenMiddle;
-    document.getElementById("vOpenHight").value = data.OpenHight;
-  } else {
-    addMessage("<strong>Error:</strong> eeprom data are empty");
-  }
 }
 
 
@@ -89,9 +107,9 @@ function getBlindsPosition() {
     var leftBlindRange = document.getElementById("LeftBlind");
     var rightBlindRange = document.getElementById("RightBlind");
 
-    var data = JSON.parse(getEepromValues());
-    leftBlindRange.value = data.LeftBlindPosition;
-    rightBlindRange.value = data.RightBlindPosition;
+    //var data = JSON.parse(getEepromValues());
+    //leftBlindRange.value = data.LeftBlindPosition;
+    //rightBlindRange.value = data.RightBlindPosition;
 }
 
 function map(x, in_min, in_max, out_min, out_max) {
@@ -114,7 +132,6 @@ function setBlindPercent(blind, value) {
 }
 
 function doRequest(url) {
-
     if (url != null) {
         if (window.ActiveXObject) {
             httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
@@ -128,14 +145,10 @@ function doRequest(url) {
             var code = httpRequest.status;
             if (this.readyState == 4 && this.status == 200) {
                 addMessage("OK", "succesfull");
-                if (url.includes("/control/blind")) {
-                  getBlindsPosition();
-                }
             }
             if (this.status != 200) {
                 addMessage("<strong>Error:</strong> request with status code " + code, "error");
             }
-            console.log("Done", code);
         }
 
         httpRequest.send(null);
