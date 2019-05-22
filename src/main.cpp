@@ -106,9 +106,47 @@ void handleDeviceActions() {
   }
 }
 
+//BLIND CONTROLER
+void blindControler(String blind, byte value, String action) {
+  if (action == "m") {
+    if (blind == "left") {
+      moveLeftBlind(value, true);
+    }
+    if (blind == "right") {
+      moveRightBlind(value, true);
+    }
+    if (blind == "all") {
+      moveAllBlinds(value, true);
+    }
+  }
+  if (action == "s_cs") {
+    saveCloseSunAngle(value);
+  }
+  if (action == "s_cn") {
+    saveCloseNightAngle(value);
+  }
+  if (action == "s_ol") {
+    saveOpenLowAngle(value);
+  }
+  if (action == "s_om") {
+    saveOpenMiddleAngle(value);
+  }
+  if (action == "s_oh") {
+    saveOpenHightAngle(value);
+  }
+}
+
 // Replaces placeholder with LED state value
 String processorSetBlinds(const String& var){
-  if(var == "vCloseSun"){
+  if (var == "vLeftBlindPosition") {
+    String value = (String)loadLeftBlindAngle();
+    return value;
+  }
+  if (var == "vRightBlindPosition") {
+    String value = (String)loadRightBlindAngle();
+    return value;
+  }
+  if(var == "vCloseSun") {
     String value = (String)loadCloseSunAngle();
     return value;
   }
@@ -116,15 +154,15 @@ String processorSetBlinds(const String& var){
     String value = (String)loadCloseNightAngle();
     return value;
   }
-  if(var == "vOpenLow"){
+  if(var == "vOpenLow") {
     String value = (String)loadOpenLowtAngle();
     return value;
   }
-  if(var == "OpenMiddle"){
+  if(var == "OpenMiddle") {
     String value = (String)loadOpenMiddleAngle();
     return value;
   }
-  if(var == "vOpenHight"){
+  if(var == "vOpenHight") {
     String value = (String)loadOpenHightAngle();
     return value;
   }
@@ -224,6 +262,15 @@ void startWebServer()
   });
 
   server.on("/control/blind/calibration", HTTP_GET, [](AsyncWebServerRequest *request){
+    if (request->hasParam("blind") && request->hasParam("value") && request->hasParam("action")) {
+      AsyncWebParameter* pBlind = request->getParam("blind");
+      AsyncWebParameter* pValue = request->getParam("value");
+      AsyncWebParameter* pAction = request->getParam("action");
+
+      if (pBlind->value() != "" && pValue->value() != "" && pAction->value() != "") {
+        blindControler(pBlind->value().c_str(), byte(pValue->value().toInt()), pAction->value().c_str());
+      }
+    }
     request->send(200, "text/plain", "OK");
   });
 

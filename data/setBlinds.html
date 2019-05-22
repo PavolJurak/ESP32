@@ -37,9 +37,9 @@
                 <td class="text-md-left">Choose blind</td>
                 <td>
                   <select class="form-control" id="selectBlind">
-                    <option value="">Left blind</option>
-                    <option value="">Right blind</option>
-                    <option value="">All blinds</option>
+                    <option value="left">Left blind</option>
+                    <option value="right">Right blind</option>
+                    <option value="all">All blinds</option>
                   </select>
                 </td>
               </tr>
@@ -53,12 +53,12 @@
                 <td class="text-md-left">Action</td>
                 <td>
                   <select class="form-control" id="selectAction">
-                    <option value="M">Move</option>
-                    <option value="S_CS">Save - CloseSun</option>
-                    <option value="S_CN">Save - CloseNight</option>
-                    <option value="S_OL">Save - OpenLow</option>
-                    <option value="S_OM">Save - OpenMiddle</option>
-                    <option value="S_OH">Save - OpenHight</option>
+                    <option value="m">Move</option>
+                    <option value="s_cs">Save - CloseSun</option>
+                    <option value="s_cn">Save - CloseNight</option>
+                    <option value="s_ol">Save - OpenLow</option>
+                    <option value="s_om">Save - OpenMiddle</option>
+                    <option value="s_oh">Save - OpenHight</option>
                   </select>
                 </td>
               </tr>
@@ -79,6 +79,14 @@
           <h4 class="card-title text-md-center">EEPROM values</h4>
           <table class="table-custom text-md-center">
             <tbody>
+                <tr>
+                  <td class="text-md-left">Left blind position</td>
+                  <td><input type="text" class="form-control" id="vLeftBlindPosition" value="%vLeftBlindPosition%"></td>
+                </tr>
+                <tr>
+                  <td class="text-md-left">Right blind position</td>
+                  <td><input type="text" class="form-control" id="vRightBlindPosition" value="%vRightBlindPosition%"></td>
+                </tr>
                 <tr>
                   <td class="text-md-left">CloseSun</td>
                   <td><input type="text" class="form-control" id="vCloseSun" value="%vCloseSun%"></td>
@@ -102,7 +110,7 @@
                 <tr>
                   <td></td>
                   <td>
-                    <input type="button" value="REFRESH" class="btn btn-success btn-full-width" onclick="refreshEepromValues('eeprom/values');">
+                    <input type="button" value="REFRESH" class="btn btn-success btn-full-width" onclick="refreshEepromValues();">
                   </td>
                 </tr>
             </tbody>

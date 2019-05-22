@@ -97,7 +97,7 @@ void saveOpenMiddleAngle(byte angle)
   Serial.println("Save to EEPROM OPEN_MIDDLE=" + (String)angle);
 }
 
-void saveOpenNightAngle(byte angle)
+void saveOpenHightAngle(byte angle)
 {
   EEPROM.write(6, angle);
   EEPROM.commit();
@@ -111,7 +111,9 @@ String getJsonEepromValues()
   json += "\"CloseNight\":\"" + String(loadCloseNightAngle()) + "\",";
   json += "\"OpenLow\":\"" + String(loadOpenHightAngle()) + "\",";
   json += "\"OpenMiddle\":\"" + String(loadOpenMiddleAngle()) + "\",";
-  json += "\"OpenHight\":\"" + String(loadOpenHightAngle()) + "\"";
+  json += "\"OpenHight\":\"" + String(loadOpenHightAngle()) + "\",";
+  json += "\"LeftBlindPosition\":\"" + String(loadLeftBlindAngle()) + "\",";
+  json += "\"RightBlindPosition\":\"" + String(loadRightBlindAngle()) + "\"";
   json += "}";
   return json;
 }
@@ -126,5 +128,5 @@ void eeprom_inic()
   saveCloseNightAngle(175);
   saveOpenLowAngle(15);
   saveOpenMiddleAngle(90);
-  saveOpenNightAngle(135);
+  saveOpenHightAngle(135);
 }
