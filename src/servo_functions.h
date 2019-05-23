@@ -6,7 +6,7 @@
 #define MAX_POSITION 175
 
 #define LEFT_SERVO_PIN 5
-#define RIGHT_SERVO_PIN 20
+#define RIGHT_SERVO_PIN 17
 
 boolean isRunLeftServo = false;
 boolean isRunRightServo = false;
@@ -104,29 +104,28 @@ byte convertPointToPercent(byte point)
 void moveLeftBlind(int angle, boolean save)
 {
   byte newAngle = mirrorAngle(validationAngle(angle)); // lave servo sa toci v opacnom smere
-  startLeftServo(newAngle);
-  if (save == true) {
-    saveLeftBlindAngle(angle);
+  if (!isRunLeftServo) {
+    startLeftServo(newAngle);
+    if (save == true) {
+      saveLeftBlindAngle(angle);
+    }
   }
 }
 
 void moveRightBlind(int angle, boolean save)
 {
   byte newAngle = validationAngle(angle);
-  startRightServo(newAngle);
-  if (save == true) {
-    saveRightBlindAngle(newAngle);
+  if (!isRunRightServo) {
+    startRightServo(newAngle);
+    if (save == true) {
+      saveRightBlindAngle(newAngle);
+    }
   }
 }
 
 void moveAllBlinds(int angle, boolean save)
 {
-  if (save == true) {
-    moveLeftBlind(angle, true);
-    moveRightBlind(angle, true);
-  }else {
-    moveLeftBlind(angle, false);
-    moveRightBlind(angle, false);
-  }
+  moveLeftBlind(angle, true);
+  moveRightBlind(angle, true);
 }
 /*-------------------------HANDLER FUNCTION FOR POWER OFF SERVO --------------*/

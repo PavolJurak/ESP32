@@ -109,7 +109,7 @@ String getJsonEepromValues()
   String json = "{";
   json += "\"CloseSun\":\"" + String(loadCloseSunAngle()) + "\",";
   json += "\"CloseNight\":\"" + String(loadCloseNightAngle()) + "\",";
-  json += "\"OpenLow\":\"" + String(loadOpenHightAngle()) + "\",";
+  json += "\"OpenLow\":\"" + String(loadOpenLowtAngle()) + "\",";
   json += "\"OpenMiddle\":\"" + String(loadOpenMiddleAngle()) + "\",";
   json += "\"OpenHight\":\"" + String(loadOpenHightAngle()) + "\",";
   json += "\"LeftBlindPosition\":\"" + String(loadLeftBlindAngle()) + "\",";
