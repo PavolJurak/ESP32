@@ -10,6 +10,12 @@
 #include <eeprom_functions.h>
 #include <servo_functions.h>
 
+#define BUTTON_LEFT_UP_PIN 1
+#define BUTTON_LEFT_DOWN_PIN 2
+#define BUTTON_RIGHT_UP_PIN 3
+#define BUTTON_RIGHT_DOWN_PIN 4
+#define BUTTON_DEFAULT_PIN 5
+
 struct Light {
   char name[20];
   char fauxmo_name[20];
@@ -200,7 +206,7 @@ void startWebServer()
       String pName = p->name();
       String pValue = p->value();
       for(int i=0; i<sizeArrayLights; i++) {
-        if (pName == (String)lights[i].name){
+        if (pName == (String)lights[i].name) {
           if (pValue == "ON") {
             lights[i].action = true;
             lights[i].power = true;
@@ -297,6 +303,54 @@ void startWebServer()
   });
 
   server.begin();
+}
+
+void handleButtons() {
+  if (digitalRead(BUTTON_LEFT_UP_PIN) || digitalRead(BUTTON_LEFT_DOWN_PIN)
+      || digitalRead(BUTTON_RIGHT_UP_PIN) || digitalRead(BUTTON_RIGHT_DOWN_PIN)) {
+        boolean isChangeLeftPosition = false;
+        boolean isChangeRightPosition = false;
+        byte minPosition = loadCloseSunAngle();
+        byte maxPosition = loadCloseNightAngle();
+        byte actualLeftPosition = loadLeftBlindAngle();
+        byte actualRightPosition = loadRightBlindAngle();
+
+        while (digitalRead(BUTTON_LEFT_UP_PIN) || digitalRead(BUTTON_LEFT_DOWN_PIN)
+              || digitalRead(BUTTON_RIGHT_UP_PIN) || digitalRead(BUTTON_RIGHT_DOWN_PIN)) {
+
+              if (digitalRead(BUTTON_LEFT_UP_PIN)) {
+                actualLeftPosition++;
+                isChangeLeftPosition = true;
+                moveLeftBlind(actualLeftPosition, false);
+                delay(8);
+              }
+              if (digitalRead(BUTTON_LEFT_DOWN_PIN)) {
+                actualLeftPosition--;
+                isChangeLeftPosition = true;
+                moveLeftBlind(actualLeftPosition, false);
+                delay(8);
+              }
+              if (digitalRead(BUTTON_RIGHT_UP_PIN)) {
+                actualRightPosition++;
+                isChangeRightPosition = true;
+                moveRightBlind(actualRightPosition, false);
+                delay(8);
+              }
+              if (digitalRead(BUTTON_RIGHT_DOWN_PIN)) {
+                actualRightPosition--;
+                isChangeRightPosition = true;
+                moveRightBlind(actualRightPosition, false);
+                delay(8);
+              }
+
+            }
+            if (isChangeLeftPosition) {
+              saveLeftBlindAngle(actualLeftPosition);
+            }
+            if (isChangeRightPosition) {
+              saveRightBlindAngle(actualRightPosition);
+            }
+      }
 }
 
 /* ------------------------------------------------------------------ */
