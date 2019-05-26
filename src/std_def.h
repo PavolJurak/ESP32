@@ -1,8 +1,7 @@
 #ifndef USER_DEF
 #define USER_DEF
 
-#define SSID "CRITICAL ERROR"
-#define PASSWORD "63726152"
+#include "wifi_config.h"
 
 // SERVO CONFIGURATION
 #define MIN_POSITION 5
