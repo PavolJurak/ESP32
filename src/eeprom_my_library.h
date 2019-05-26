@@ -1,7 +1,7 @@
-#include <Arduino.h>
-#ifndef EEPROM_h
-#include <EEPROM.h>
-#endif
+void startEEPROM()
+{
+  EEPROM.begin(20);
+}
 
 /*Pozicie v pamati
 0 -> uhol otocenia lavej lamely zaluzie

@@ -1,12 +1,4 @@
-#include <Arduino.h>
-#include <Servo.h>
 
-#define maxTimeRunServo 1500 //ms
-#define MIN_POSITION 5
-#define MAX_POSITION 175
-
-#define LEFT_SERVO_PIN 5
-#define RIGHT_SERVO_PIN 17
 
 boolean isRunLeftServo = false;
 boolean isRunRightServo = false;
@@ -36,7 +28,7 @@ void closeTransistor()
 void startLeftServo(int angle)
 {
   openTransistor();
-  timeEndLeftServo = millis() + maxTimeRunServo;
+  timeEndLeftServo = millis() + MAX_TIME_RUN_SERVO;
   isRunLeftServo = true;
   leftServo.attach(LEFT_SERVO_PIN);
   leftServo.write(angle);
@@ -46,7 +38,7 @@ void startLeftServo(int angle)
 void startRightServo(int angle)
 {
   openTransistor();
-  timeEndRightServo = millis() + maxTimeRunServo;
+  timeEndRightServo = millis() + MAX_TIME_RUN_SERVO;
   isRunRightServo = true;
   rightServo.attach(RIGHT_SERVO_PIN);
   rightServo.write(angle);
@@ -128,4 +120,50 @@ void moveAllBlinds(int angle, boolean save)
   moveLeftBlind(angle, true);
   moveRightBlind(angle, true);
 }
+
+/*------------------------ BLIND CONDTROLER --------------------------------*/
+void blindControler(String blind, byte value, String action) {
+  if (action == "m") {
+    if (blind == "left") {
+      moveLeftBlind(value, true);
+    }
+    if (blind == "right") {
+      moveRightBlind(value, true);
+    }
+    if (blind == "all") {
+      moveAllBlinds(value, true);
+    }
+  }
+  if (action == "s_cs") {
+    saveCloseSunAngle(value);
+  }
+  if (action == "s_cn") {
+    saveCloseNightAngle(value);
+  }
+  if (action == "s_ol") {
+    saveOpenLowAngle(value);
+  }
+  if (action == "s_om") {
+    saveOpenMiddleAngle(value);
+  }
+  if (action == "s_oh") {
+    saveOpenHightAngle(value);
+  }
+}
 /*-------------------------HANDLER FUNCTION FOR POWER OFF SERVO --------------*/
+void hanleServoPowerOff()
+{
+  if (isRunLeftServo) {
+    if (millis() >= timeEndLeftServo) {
+      stopLeftServo();
+    }
+  }
+  if (isRunRightServo) {
+    if (millis() >= timeEndRightServo) {
+      stopRightServo();
+    }
+  }
+  if (isRunLeftServo == false && isRunRightServo == false && isOpenTransistor == true) {
+    closeTransistor();
+  }
+}

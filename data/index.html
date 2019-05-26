@@ -167,7 +167,7 @@
                         <td>Right blind</td>
                         <td colspan="3">
                             <label for="RightBlind"><span id="rightBlindPosition"></span></label>
-                            <input type="range" id="RightBlind" min="5" max="175" step="1" value="%vLeftBlindPosition%"
+                            <input type="range" id="RightBlind" min="5" max="175" step="1" value="%vRightBlindPosition%"
                                    onmouseup="doRequest('/control/blind?RightBlind='+value)"
                                    onchange="setBlindPercent('Right',this.value)">
                         </td>
@@ -253,5 +253,9 @@
     </div>
   </div>
 </footer>
+<script>
+  setBlindPercent('Right', document.getElementById('RightBlind').value);
+  setBlindPercent('Left', document.getElementById('LeftBlind').value);
+</script>
 </body>
 </html>

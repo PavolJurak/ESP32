@@ -43,32 +43,6 @@ function sendCalibrationRequest() {
 
 }
 
-function getEepromValues() {
-
-  var url = 'eeprom/values';
-  var jsonData = "";
-  if (window.ActiveXObject) {
-      httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-  } else {
-      httpRequest = new XMLHttpRequest();
-  }
-  httpRequest.open("GET", url, true);
-
-  httpRequest.onload = function () {
-      if (this.readyState == 4 && this.status == 200) {
-          addMessage("REFRESH SUCCESFULL", "succesfull");
-          jsonData = this.responseText;
-          console.log("Done", this.status);
-      }
-      if (this.status != 200) {
-          addMessage("<strong>Error:</strong> request with status code " + code, "error");
-      }
-      return jsonData;
-  }
-  httpRequest.send(null);
-
-}
-
 function refreshEepromValues() {
   var url = 'eeprom/values';
 
@@ -102,14 +76,31 @@ function refreshEepromValues() {
 }
 
 
-function getBlindsPosition() {
+function refreshRangeElements() {
 
-    var leftBlindRange = document.getElementById("LeftBlind");
-    var rightBlindRange = document.getElementById("RightBlind");
+    var url = 'eeprom/values';
 
-    //var data = JSON.parse(getEepromValues());
-    //leftBlindRange.value = data.LeftBlindPosition;
-    //rightBlindRange.value = data.RightBlindPosition;
+    if (window.ActiveXObject) {
+        httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+    } else {
+        httpRequest = new XMLHttpRequest();
+    }
+    httpRequest.open("GET", url, true);
+
+    httpRequest.onload = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            addMessage("REFRESH SUCCESFULL", "succesfull");
+            var data = this.responseText;
+            var jsonData = JSON.parse(data);
+            document.getElementById("LeftBlind").value = jsonData.LeftBlindPosition;
+            document.getElementById("RightBlind").value = jsonData.RightBlindPosition;
+            console.log("Done", this.status);
+        }
+        if (this.status != 200) {
+            addMessage("<strong>Error:</strong> request with status code " + this.status + "error");
+        }
+    }
+    httpRequest.send(null);
 }
 
 function map(x, in_min, in_max, out_min, out_max) {
@@ -145,6 +136,9 @@ function doRequest(url) {
             var code = httpRequest.status;
             if (this.readyState == 4 && this.status == 200) {
                 addMessage("OK", "succesfull");
+                if (url.includes("/control/blind")) {
+                  refreshRangeElements();
+                }
             }
             if (this.status != 200) {
                 addMessage("<strong>Error:</strong> request with status code " + code, "error");
