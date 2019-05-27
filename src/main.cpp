@@ -6,9 +6,11 @@
 #include <EEPROM.h>
 #include <WiFi.h>
 #include <Servo.h>
+#include "fauxmoESP.h"
 #include "std_def.h"
 
-AsyncWebServer server(80);
+AsyncWebServer server(88);
+fauxmoESP fauxmo;
 RCSwitch radio433 = RCSwitch();
 
 struct Light {
@@ -66,6 +68,42 @@ void handleDeviceActions() {
   hanleServoPowerOff();
 }
 
+void startFauxmo()
+{
+
+  for (int i=0; i<sizeArrayLights; i++) {
+    fauxmo.addDevice(lights[i].name);
+  }
+  fauxmo.setPort(80);
+  fauxmo.enable(true);
+
+  fauxmo.onSetState([](unsigned char device_id, const char * device_name, bool state, unsigned char value) {
+
+        // Callback when a command from Alexa is received.
+        // You can use device_id or device_name to choose the element to perform an action onto (relay, LED,...)
+        // State is a boolean (ON/OFF) and value a number from 0 to 255 (if you say "set kitchen light to 50%" you will receive a 128 here).
+        // Just remember not to delay too much here, this is a callback, exit as soon as possible.
+        // If you have to do something more involved here set a flag and process it in your main loop.
+
+        Serial.printf("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
+        if (strcmp(device_name, "Light1") == 0) {
+          byte value = loadCloseSunAngle();
+          moveRightBlind(value, true);
+          Serial.println("OK");
+        }
+        if (strcmp(device_name, "Light2") == 0) {
+          byte value = loadCloseNightAngle();
+          moveRightBlind(value, true);
+          Serial.println("OK");
+        }
+          //fauxmo.setState(device_id, true, 255);
+
+        // Checking for device_id is simpler if you are certain about the order they are loaded and it does not change.
+        // Otherwise comparing the device_name is safer.
+
+    });
+
+}
 
 /* ------------------------------------------------------------------ */
 void setup() {
@@ -75,9 +113,11 @@ void setup() {
   startWiFi();
   startRadio433();
   startWebServer();
+  startFauxmo();
 }
 
 void loop() {
   checkWiFiConnect();
   handleDeviceActions();
+  fauxmo.handle();
 }
