@@ -86,15 +86,16 @@ void startFauxmo()
         // If you have to do something more involved here set a flag and process it in your main loop.
 
         Serial.printf("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
-        if (strcmp(device_name, "Light1") == 0) {
-          byte value = loadCloseSunAngle();
-          moveRightBlind(value, true);
-          Serial.println("OK");
-        }
-        if (strcmp(device_name, "Light2") == 0) {
-          byte value = loadCloseNightAngle();
-          moveRightBlind(value, true);
-          Serial.println("OK");
+        for (int i=0; i<sizeArrayLights; i++) {
+          if (strcmp(device_name, lights[i].name)) {
+            if (state) {
+              radio433.send(lights[i].on_code,24);
+              fauxmo.setState(device_id, true, 255);
+            } else {
+              radio433.send(lights[i].off_code,24);
+              fauxmo.setState(device_id, false, 255);
+            }
+          }
         }
           //fauxmo.setState(device_id, true, 255);
 
