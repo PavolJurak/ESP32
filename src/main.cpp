@@ -13,6 +13,17 @@ AsyncWebServer server(88);
 fauxmoESP fauxmo;
 RCSwitch radio433 = RCSwitch();
 
+struct Blind {
+  char name[20];
+};
+
+Blind blind1 = {"Left blind"};
+Blind blind2 = {"Right blind"};
+Blind blind3 = {"All blinds"};
+
+Blind blinds[] = {blind1, blind2, blind3};
+int sizeArrayBlinds = sizeof(blinds)/sizeof(Blind);
+
 struct Light {
   char name[20];
   unsigned int on_code;
@@ -69,10 +80,15 @@ void handleDeviceActions() {
 
 void startFauxmo()
 {
-
+  //add lights devices to fauxmo
   for (int i=0; i<sizeArrayLights; i++) {
     fauxmo.addDevice(lights[i].name);
   }
+  //add blinds devices to fauxmo
+  for (int i=0; i<sizeArrayBlinds; i++) {
+    fauxmo.addDevice(blinds[i].name);
+  }
+
   fauxmo.setPort(80);
   fauxmo.enable(true);
 
@@ -88,16 +104,28 @@ void startFauxmo()
 
         //handle lights
         for (int i=0; i<sizeArrayLights; i++) {
-          if (strcmp(device_name, lights[i].name)) {
+          if (strcmp(device_name, lights[i].name) == 0) {
             if (state) {
               radio433.send(lights[i].on_code,24);
-              fauxmo.setState(device_id, true, 255);
+              fauxmo.setState(device_id, true, 0);
             } else {
               radio433.send(lights[i].off_code,24);
-              fauxmo.setState(device_id, false, 255);
+              fauxmo.setState(device_id, false, 0);
             }
           }
         }
+
+        //Right blind
+        if (strcmp(device_name, blind2.name) == 0) {
+          if (state) {
+            fauxmo.setState(device_id, true, 0);
+            moveRightBlind(loadOpenMiddleAngle(), true);
+          } else {
+            fauxmo.setState(device_id, false, 0);
+            moveRightBlind(loadCloseSunAngle(), true);
+          }
+        }
+
           //fauxmo.setState(device_id, true, 255);
 
         // Checking for device_id is simpler if you are certain about the order they are loaded and it does not change.
