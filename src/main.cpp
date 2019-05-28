@@ -86,6 +86,8 @@ void startFauxmo()
         // If you have to do something more involved here set a flag and process it in your main loop.
 
         Serial.printf("[MAIN] Device #%d (%s) state: %s value: %d\n", device_id, device_name, state ? "ON" : "OFF", value);
+
+        //handle lights
         for (int i=0; i<sizeArrayLights; i++) {
           if (strcmp(device_name, lights[i].name)) {
             if (state) {
