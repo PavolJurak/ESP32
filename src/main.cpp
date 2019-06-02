@@ -5,11 +5,12 @@
 #include <SPIFFS.h>
 #include <EEPROM.h>
 #include <WiFi.h>
+#include <ESPmDNS.h>
 #include <Servo.h>
 #include "fauxmoESP.h"
 #include "std_def.h"
 
-AsyncWebServer server(88);
+AsyncWebServer server(8088);
 fauxmoESP fauxmo;
 RCSwitch radio433 = RCSwitch();
 
@@ -49,6 +50,16 @@ void startRadio433()
   radio433.setPulseLength(321);
   radio433.setProtocol(1);
   radio433.setRepeatTransmit(15);
+}
+
+void startMDNS()
+{
+  if (!MDNS.begin("esp32")) {
+        Serial.println("Error setting up MDNS responder!");
+        while(1){
+            delay(1000);
+        }
+    }
 }
 
 #include "eeprom_my_library.h"
@@ -116,15 +127,29 @@ void startFauxmo()
         }
 
         //Right blind
-        if (strcmp(device_name, blind2.name) == 0) {
-          if (state) {
-            fauxmo.setState(device_id, true, 0);
-            moveRightBlind(loadOpenMiddleAngle(), true);
-          } else {
-            fauxmo.setState(device_id, false, 0);
-            moveRightBlind(loadCloseSunAngle(), true);
-          }
+        //ON FIRST TIME WITHOUT SET
+        if (state && value == 255) {
+          moveRightBlind(loadOpenMiddleAngle(), true);
         }
+        if (!state && (value == 0 || value == 255)) {
+          moveRightBlind(loadCloseSunAngle(), true);
+        }
+        // OFF VOICE SET VALUE TO ZERO
+        if (!state && value == 1) {
+          fauxmo.setState(device_name, false, 254);
+          moveRightBlind(loadCloseSunAngle(), true);
+        }
+        // ON VOICE SET VALUE TO ONE HUNDRED
+        if (state && value == 254) {
+          fauxmo.setState(device_name, true, 254);
+          moveRightBlind(loadCloseNightAngle(), true);
+        }
+        if (state && (value > 1 && value < 254)) {
+          fauxmo.setState(device_name, true, 254);
+          int angleValue = map(value, 1, 254, loadCloseSunAngle(), loadCloseNightAngle());
+          moveRightBlind(angleValue, true);
+        }
+
 
           //fauxmo.setState(device_id, true, 255);
 
@@ -144,6 +169,7 @@ void setup() {
   startRadio433();
   startWebServer();
   startFauxmo();
+  startMDNS();
 }
 
 void loop() {
