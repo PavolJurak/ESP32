@@ -128,26 +128,26 @@ void startFauxmo()
 
         //Right blind
         //ON FIRST TIME WITHOUT SET
-        if (state && value == 255) {
-          moveRightBlind(loadOpenMiddleAngle(), true);
-        }
-        if (!state && (value == 0 || value == 255)) {
-          moveRightBlind(loadCloseSunAngle(), true);
-        }
-        // OFF VOICE SET VALUE TO ZERO
-        if (!state && value == 1) {
-          fauxmo.setState(device_name, false, 254);
-          moveRightBlind(loadCloseSunAngle(), true);
-        }
-        // ON VOICE SET VALUE TO ONE HUNDRED
-        if (state && value == 254) {
-          fauxmo.setState(device_name, true, 254);
-          moveRightBlind(loadCloseNightAngle(), true);
-        }
-        if (state && (value > 1 && value < 254)) {
-          fauxmo.setState(device_name, true, 254);
-          int angleValue = map(value, 1, 254, loadCloseSunAngle(), loadCloseNightAngle());
-          moveRightBlind(angleValue, true);
+        if (state) {
+          if (value == 255 || value == 1) {
+            fauxmo.setState(device_name, true, 254);
+            moveRightBlind(loadOpenMiddleAngle(), true);
+          }
+          if (value > 1 && value < 255) {
+            fauxmo.setState(device_name, true, 254);
+            int angleValue = map(value, 1, 254, loadCloseSunAngle(), loadCloseNightAngle());
+            moveRightBlind(angleValue, true);
+          }
+        } else {
+          if (value == 255 || value == 1) {
+            fauxmo.setState(device_name, false, 254);
+            moveRightBlind(loadCloseSunAngle(), true);
+          }
+          if (value > 1 && value < 255) {
+            fauxmo.setState(device_name, true, 254);
+            int angleValue = map(value, 1, 254, loadCloseSunAngle(), loadCloseNightAngle());
+            moveRightBlind(angleValue, true);
+          }
         }
 
 
