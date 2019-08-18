@@ -127,38 +127,21 @@ void startFauxmo()
         }
 
         //Right blind
-        //ON FIRST TIME WITHOUT SET
-        if (state) {
-          if (value == 255 || value == 1) {
-            fauxmo.setState(device_name, true, 254);
+        if (device_name = blind2.name) {
+          if (state) {
             moveRightBlind(loadOpenMiddleAngle(), true);
-          }
-          if (value > 1 && value < 255) {
-            fauxmo.setState(device_name, true, 254);
-            int angleValue = map(value, 1, 254, loadCloseSunAngle(), loadCloseNightAngle());
-            moveRightBlind(angleValue, true);
-          }
-        } else {
-          if (value == 255 || value == 1) {
-            fauxmo.setState(device_name, false, 254);
+          } else {
             moveRightBlind(loadCloseSunAngle(), true);
-          }
-          if (value > 1 && value < 255) {
-            fauxmo.setState(device_name, true, 254);
-            int angleValue = map(value, 1, 254, loadCloseSunAngle(), loadCloseNightAngle());
-            moveRightBlind(angleValue, true);
           }
         }
 
-
-          //fauxmo.setState(device_id, true, 255);
-
+        //fauxmo.setState(device_id, true, 255);
         // Checking for device_id is simpler if you are certain about the order they are loaded and it does not change.
         // Otherwise comparing the device_name is safer.
-
     });
 
 }
+
 
 /* ------------------------------------------------------------------ */
 void setup() {
