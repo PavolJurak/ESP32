@@ -20,7 +20,7 @@ struct Blind {
 
 Blind blind1 = {"Left blind"};
 Blind blind2 = {"Right blind"};
-Blind blind3 = {"All blinds"};
+Blind blind3 = {"Blinds"};
 
 Blind blinds[] = {blind1, blind2, blind3};
 int sizeArrayBlinds = sizeof(blinds)/sizeof(Blind);
@@ -33,13 +33,13 @@ struct Light {
   boolean power;
 };
 
-Light light1 = {"Light1", LIGHT_1_ON, LIGHT_1_OFF, false, false};
-Light light2 = {"Light2", LIGHT_2_ON, LIGHT_2_OFF, false, false};
-Light light3 = {"Light3", LIGHT_3_ON, LIGHT_3_OFF, false, false};
-Light light4 = {"Light4", LIGHT_4_ON, LIGHT_4_OFF, false, false};
-Light light5 = {"Light5", LIGHT_5_ON, LIGHT_5_OFF, false, false};
-Light light6 = {"Light6", LIGHT_6_ON, LIGHT_6_OFF, false, false};
-Light light7 = {"AllBedroomLights", ALL_LIGHTS_BEDROOM_ON, ALL_LIGHTS_BEDROOM_OFF, false, false};
+Light light1 = {"Light one", LIGHT_1_ON, LIGHT_1_OFF, false, false};
+Light light2 = {"Light two", LIGHT_2_ON, LIGHT_2_OFF, false, false};
+Light light3 = {"Light three", LIGHT_3_ON, LIGHT_3_OFF, false, false};
+Light light4 = {"Light four", LIGHT_4_ON, LIGHT_4_OFF, false, false};
+Light light5 = {"Light five", LIGHT_5_ON, LIGHT_5_OFF, false, false};
+Light light6 = {"Light six", LIGHT_6_ON, LIGHT_6_OFF, false, false};
+Light light7 = {"Bedroom", ALL_LIGHTS_BEDROOM_ON, ALL_LIGHTS_BEDROOM_OFF, false, false};
 
 Light lights[] = {light1, light2, light3, light4, light5, light6, light7};
 int sizeArrayLights = sizeof(lights)/sizeof(Light);
@@ -67,7 +67,6 @@ void startMDNS()
 #include "servo_my_library.h"
 #include "button_my_library.h"
 #include "server_my_library.h"
-
 
 void handleDeviceActions() {
   //LIGHTS
@@ -126,8 +125,22 @@ void startFauxmo()
           }
         }
 
+<<<<<<< HEAD
         //Right blind
         if (device_name = blind2.name) {
+=======
+        //LEFT BLIND
+        if (device_name == blind1.name) {
+          if (state) {
+            moveLeftBlind(loadOpenMiddleAngle(), true);
+          } else {
+            moveLeftBlind(loadCloseSunAngle(), true);
+          }
+        }
+
+        //RIGHT BLIND
+        if (device_name == blind2.name) {
+>>>>>>> e2b0f46788d6e1a8873e8a3dcb0bed2bfa54b60b
           if (state) {
             moveRightBlind(loadOpenMiddleAngle(), true);
           } else {
@@ -135,6 +148,18 @@ void startFauxmo()
           }
         }
 
+<<<<<<< HEAD
+=======
+        //ALL BLINDS
+        if (device_name == blind3.name) {
+          if (state) {
+            moveAllBlinds(loadOpenMiddleAngle(), true);
+          } else {
+            moveAllBlinds(loadCloseSunAngle(), true);
+          }
+        }
+
+>>>>>>> e2b0f46788d6e1a8873e8a3dcb0bed2bfa54b60b
         //fauxmo.setState(device_id, true, 255);
         // Checking for device_id is simpler if you are certain about the order they are loaded and it does not change.
         // Otherwise comparing the device_name is safer.

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="custom.css">
+    <script src="myscripts.js"></script>
+    <title>ESP32</title>
+</head>
+<body>
+  <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+      <div class="container">
+          <div class="navbar-header">
+              <a class="navbar-brand" href="/">ESP32 HUB</a>
+          </div>
+          <ul class="navbar-nav">
+              <li class="nav-item"><a href="/" class="nav-link">CONTROL</a></li>
+              <li class="nav-item"><a href="/setlwallswitch" class="nav-link">SETTING WALL SWITCH</a></li>
+              <li class="nav-item"><a href="/setblinds" class="nav-link">CALIBRATION BLINDS</a></li>
+              <li class="nav-item"><a href="/camera" class="nav-link active">CAMERA</a></li>
+              <li class="nav-item"><a href="/task" class="nav-link">TASK MANAGER</a></li>
+              <li class="nav-item"><a href="/firmware" class="nav-link">UPLOAD FIRMWARE</a></li>
+          </ul>
+      </div>
+  </nav>
+<div class="container">
+    <div class="text-md-center alert" id="message-div">
+        <p id="message"></p>
+    </div>
+        <div class="row">
+          <div class="col-md-6"></div>
+          <div class="col-md-6">
+            <table class="table-camera">
+              <tr>
+                <td>
+                  <span>IP:</span>
+                </td>
+                <td>
+                  <input type="text" class="form-control" id="ip-address">
+                </td>
+                <td class="text-right">
+                  <button type="button" class="btn btn-success" id="showVideo" onclick="showVideoInContainer();">Show video</button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger" id="saveIpCamera">Save to memory</button>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+    <div class="row">
+        <iframe src="https://sk.factcool.com" width="100%" height="700px" id="videoFrame"></iframe>
+    </div>
+</div>
+<script>
+  function showVideoInContainer() {
+    var ip = document.getElementById('ip-address').value;
+    var iframe = document.getElementById('videoFrame');
+    iframe.setAttribute("src", ip);
+    iframe.contentWindow.location.reload(true);
+  }
+</script>
+</body>
+</html>
