@@ -146,6 +146,7 @@ void startFauxmo()
 /* ------------------------------------------------------------------ */
 void setup() {
   Serial.begin(115200);
+  pinMode(TRANSISTOR_PIN, OUTPUT);
   startEEPROM();
   startSPIFFS();
   startWiFi();

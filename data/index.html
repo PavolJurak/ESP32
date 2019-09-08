@@ -3,259 +3,260 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="custom.css">
     <script src="myscripts.js"></script>
     <title>ESP32</title>
 </head>
 <body>
-<nav class="navbar navbar-expand-md bg-dark navbar-dark">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="/">ESP32 HUB</a>
-        </div>
-        <ul class="navbar-nav">
-            <li class="nav-item"><a href="/" class="nav-link active">CONTROL</a></li>
-            <li class="nav-item"><a href="/setlwallswitch" class="nav-link">SETTING WALL SWITCH</a></li>
-            <li class="nav-item"><a href="/setblinds" class="nav-link">CALIBRATION BLINDS</a></li>
-            <li class="nav-item"><a href="/task" class="nav-link">TASK MANAGER</a></li>
-            <li class="nav-item"><a href="/firmware" class="nav-link">UPLOAD FIRMWARE</a></li>
-        </ul>
-    </div>
-</nav>
-<div class="container">
-    <div class="text-md-center alert" id="message-div">
-        <p id="message"></p>
-    </div>
-    <div class="row">
-        <div class="card card1 col-md-6">
-            <div class="card-body">
-                <h2 class="card-title text-md-center">Bedroom</h2>
-                <table class="table-custom text-md-center">
-                    <tbody>
-                    <tr>
-                        <td>Light 1</td>
-                        <td>
-                            <input type="button" name="Light1" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?Light1=ON')">
-                        </td>
-                        <td>
-                            <input type="button" name="Light1" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?Light1=OFF')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Light 2</td>
-                        <td>
-                            <input type="button" name="Light2" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?Light2=ON')">
-                        </td>
-                        <td>
-                            <input type="button" name="Light2" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?Light2=OFF')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>All lights</td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?AllBedroomLights=ON')">
-                        </td>
-                        <td>
-                            <input type="button" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?AllBedroomLights=OFF')">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-                <table class="table-custom text-md-center">
-                    <tbody>
-                    <tr>
-                        <td colspan="4"><h4 class="card-title">Blinds</h4></td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Left blind</td>
-                        <td>Right blind</td>
-                        <td>All blinds</td>
-                    </tr>
-                    <tr>
-                        <td>Close(Sun)</td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=CloseSun')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?RightBlind=CloseSun')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=CloseSun&RightBlind=CloseSun')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Close(Night)</td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=CloseNight')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?RightBlind=CloseNight')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=CloseNight&RightBlind=CloseNight')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Open(Low)</td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=OpenLow')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?RightBlind=OpenLow')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=OpenLow&RightBlind=OpenLow')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Open(Middle)</td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=OpenMiddle')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?RightBlind=OpenMiddle')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=OpenMiddle&RightBlind=OpenMiddle')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Open(Hight)</td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=OpenHight')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?RightBlind=OpenHight')">
-                        </td>
-                        <td>
-                            <input type="button" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/blind?LeftBlind=OpenHight&RightBlind=OpenHight')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Left blind</td>
-                        <td colspan="3">
-                            <label for="LeftBlind"><span id="leftBlindPosition"></span></label>
-                            <input type="range" id="LeftBlind" min="5" max="175" step="1" value="%vLeftBlindPosition%"
-                                   onmouseup="doRequest('/control/blind?LeftBlind='+value)"
-                                   onchange="setBlindPercent('Left',this.value)">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Right blind</td>
-                        <td colspan="3">
-                            <label for="RightBlind"><span id="rightBlindPosition"></span></label>
-                            <input type="range" id="RightBlind" min="5" max="175" step="1" value="%vRightBlindPosition%"
-                                   onmouseup="doRequest('/control/blind?RightBlind='+value)"
-                                   onchange="setBlindPercent('Right',this.value)">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+    <div id="container">
+
+        <header>
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <div class="container">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">ESP32 HUB</a>
+                    </div>
+                    <ul class="navbar-nav">
+                        <li class="nav-item"><a href="/" class="nav-link active">CONTROL</a></li>
+                        <li class="nav-item"><a href="/setlwallswitch" class="nav-link">SETTING WALL SWITCH</a></li>
+                        <li class="nav-item"><a href="/setblinds" class="nav-link">CALIBRATION BLINDS</a></li>
+                        <li class="nav-item"><a href="/taskmanager" class="nav-link">TASK MANAGER</a></li>
+                        <li class="nav-item"><a href="/uploadfirmware" class="nav-link">UPLOAD FIRMWARE</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <div id="body">
+            <div class="container">
+                <div class="text-md-center alert" id="message-div">
+                    <p id="message"></p>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title text-md-center">Bedroom</h2>
+                                <table class="card-table text-md-center">
+                                    <tbody>
+                                        <tr>
+                                            <td>Light 1</td>
+                                            <td>
+                                                <input type="button" name="Light1" value="ON" class="btn btn-success btn-full-width" onclick="doRequest('/control/light?Light1=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" name="Light1" value="OFF" class="btn btn-danger btn-full-width" onclick="doRequest('/control/light?Light1=OFF')">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Light 2</td>
+                                            <td>
+                                                <input type="button" name="Light2" value="ON" class="btn btn-success btn-full-width" onclick="doRequest('/control/light?Light2=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" name="Light2" value="OFF" class="btn btn-danger btn-full-width" onclick="doRequest('/control/light?Light2=OFF')">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                        <td>All lights</td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width" onclick="doRequest('/control/light?AllBedroomLights=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="OFF" class="btn btn-danger btn-full-width" onclick="doRequest('/control/light?AllBedroomLights=OFF')">
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4"><h4 class="card-title">Blinds</h4></td>
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td>Left blind</td>
+                                            <td>Right blind</td>
+                                            <td>All blinds</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Close(Sun)</td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=CloseSun')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?RightBlind=CloseSun')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=CloseSun&RightBlind=CloseSun')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Close(Night)</td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=CloseNight')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?RightBlind=CloseNight')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=CloseNight&RightBlind=CloseNight')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Open(Low)</td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=OpenLow')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?RightBlind=OpenLow')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=OpenLow&RightBlind=OpenLow')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Open(Middle)</td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=OpenMiddle')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?RightBlind=OpenMiddle')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=OpenMiddle&RightBlind=OpenMiddle')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Open(Hight)</td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=OpenHight')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?RightBlind=OpenHight')">
+                                            </td>
+                                            <td>
+                                                <input type="button" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/blind?LeftBlind=OpenHight&RightBlind=OpenHight')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Left blind</td>
+                                            <td colspan="3">
+                                                <label for="LeftBlind"><span id="leftBlindPosition"></span></label>
+                                                <input type="range" id="LeftBlind" min="5" max="175" step="1" value="%vLeftBlindPosition%"
+                                                       onmouseup="doRequest('/control/blind?LeftBlind='+value)"
+                                                       onchange="setBlindPercent('Left',this.value)">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Right blind</td>
+                                            <td colspan="3">
+                                                <label for="RightBlind"><span id="rightBlindPosition"></span></label>
+                                                <input type="range" id="RightBlind" min="5" max="175" step="1" value="%vRightBlindPosition%"
+                                                       onmouseup="doRequest('/control/blind?RightBlind='+value)"
+                                                       onchange="setBlindPercent('Right',this.value)">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h2 class="card-title text-md-center">Living room</h2>
+                                <table class="card-table text-md-center">
+                                    <tbody>
+                                        <tr>
+                                            <td>Light 1</td>
+                                            <td>
+                                                <input type="button" name="Light3" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/light?Light3=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" name="Light3" value="OFF" class="btn btn-danger btn-full-width"
+                                                       onclick="doRequest('/control/light?Light3=OFF')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Light 2</td>
+                                            <td>
+                                                <input type="button" name="Light4" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/light?Light4=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" name="Light4" value="OFF" class="btn btn-danger btn-full-width"
+                                                       onclick="doRequest('/control/light?Light4=OFF')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Light 3</td>
+                                            <td>
+                                                <input type="button" name="Light5" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/light?Light5=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" name="Light5" value="OFF" class="btn btn-danger btn-full-width"
+                                                       onclick="doRequest('/control/light?Light5=OFF')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Light 4</td>
+                                            <td>
+                                                <input type="button" name="Light6" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/light?Light6=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" name="Light6" value="OFF" class="btn btn-danger btn-full-width"
+                                                       onclick="doRequest('/control/light?Light6=OFF')">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>All lights</td>
+                                            <td>
+                                                <input type="button" name="AllLights" value="ON" class="btn btn-success btn-full-width"
+                                                       onclick="doRequest('/control/light?Light3=ON&Light4=ON&Light5=ON&Light6=ON')">
+                                            </td>
+                                            <td>
+                                                <input type="button" name="AllLights" value="OFF" class="btn btn-danger btn-full-width"
+                                                       onclick="doRequest('/control/light?Light3=OFF&Light4=OFF&Light5=OFF&Light6=OFF')">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="card card1 col-md-6">
-            <div class="card-body">
-                <h2 class="card-title text-md-center">Living room</h2>
-                <table class="table-custom text-md-center">
-                    <tbody>
-                    <tr>
-                        <td>Light 1</td>
-                        <td>
-                            <input type="button" name="Light3" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?Light3=ON')">
-                        </td>
-                        <td>
-                            <input type="button" name="Light3" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?Light3=OFF')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Light 2</td>
-                        <td>
-                            <input type="button" name="Light4" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?Light4=ON')">
-                        </td>
-                        <td>
-                            <input type="button" name="Light4" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?Light4=OFF')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Light 3</td>
-                        <td>
-                            <input type="button" name="Light5" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?Light5=ON')">
-                        </td>
-                        <td>
-                            <input type="button" name="Light5" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?Light5=OFF')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Light 4</td>
-                        <td>
-                            <input type="button" name="Light6" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?Light6=ON')">
-                        </td>
-                        <td>
-                            <input type="button" name="Light6" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?Light6=OFF')">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>All lights</td>
-                        <td>
-                            <input type="button" name="AllLights" value="ON" class="btn btn-success btn-full-width"
-                                   onclick="doRequest('/control/light?Light3=ON&Light4=ON&Light5=ON&Light6=ON')">
-                        </td>
-                        <td>
-                            <input type="button" name="AllLights" value="OFF" class="btn btn-danger btn-full-width"
-                                   onclick="doRequest('/control/light?Light3=OFF&Light4=OFF&Light5=OFF&Light6=OFF')">
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+
+        <div id="footer">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="copyright">Copyright © 2019 Created Ing. Pavol Jurák</div>
+                    </div>
+                </div>
+            </footer>
         </div>
+
     </div>
-</div>
-<footer>
-  <div class="footer">
-    <div class="container">
-      <div class="row">
-        <div class="copyright">Copyright © 2019 Created Ing. Pavol Jurák</div>
-      </div>
-    </div>
-  </div>
-</footer>
-<script>
-  setBlindPercent('Right', document.getElementById('RightBlind').value);
-  setBlindPercent('Left', document.getElementById('LeftBlind').value);
-</script>
 </body>
 </html>

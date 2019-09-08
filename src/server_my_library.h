@@ -63,6 +63,14 @@ void startWebServer()
     request->send(SPIFFS, "/setBlinds.html", String(), false, processorSetBlinds);
   });
 
+  server.on("/taskmanager", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/taskManager.html", String(), false, processorSetBlinds);
+  });
+
+  server.on("/uploadfirmware", HTTP_GET, [](AsyncWebServerRequest *request){
+    request->send(SPIFFS, "/uploadFirmware.html", String(), false, processorSetBlinds);
+  });
+
   server.on("/control/light", HTTP_GET, [](AsyncWebServerRequest *request){
     for (int i=0; i<request->params(); i++) {
       AsyncWebParameter* p = request->getParam(i);

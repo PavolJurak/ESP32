@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="custom.css">
+    <script src="myscripts.js"></script>
+    <title>ESP32</title>
+</head>
+<body>
+    <div id="container">
+
+        <header>
+             <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+              <div class="container">
+                  <div class="navbar-header">
+                      <a class="navbar-brand" href="/">ESP32 HUB</a>
+                  </div>
+                  <ul class="navbar-nav">
+                    <li class="nav-item"><a href="/" class="nav-link">CONTROL</a></li>
+                    <li class="nav-item"><a href="/setlwallswitch" class="nav-link">SETTING WALL SWITCH</a></li>
+                    <li class="nav-item"><a href="/setblinds" class="nav-link">CALIBRATION BLINDS</a></li>
+                    <li class="nav-item"><a href="/taskmanager" class="nav-link">TASK MANAGER</a></li>
+                    <li class="nav-item"><a href="/uploadfirmware" class="nav-link active">UPLOAD FIRMWARE</a></li>
+                </ul>
+              </div>
+            </nav>
+        </header>
+
+        <div id="body">
+            <div class="container">
+                <div class="row">
+                    <div class="card middle text-md-center">
+                        <div class="card-body">
+                            <h3 class="card-title text-md-center">Upload firmware to ESP32</h3>
+
+                            <fomr class="upload-form">
+                                <input type="text" class="form-control" placeholder="User">
+                                <input type="password" class="form-control" placeholder="Password">
+                                <label class="file">
+                                    <input type="file" id="file" aria-label="File browser example">
+                                    <span class="file-custom"></span>
+                                </label>
+                                <input type="submit"  class="btn btn-success" value="Upload Firmware">
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="footer">
+            <footer>
+                <div class="container">
+                    <div class="row">
+                        <div class="copyright">Copyright © 2019 Created Ing. Pavol Jurák</div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+    </div>
+</body>
+</html>
