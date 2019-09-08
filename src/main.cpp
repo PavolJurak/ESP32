@@ -125,10 +125,6 @@ void startFauxmo()
           }
         }
 
-<<<<<<< HEAD
-        //Right blind
-        if (device_name = blind2.name) {
-=======
         //LEFT BLIND
         if (device_name == blind1.name) {
           if (state) {
@@ -140,7 +136,6 @@ void startFauxmo()
 
         //RIGHT BLIND
         if (device_name == blind2.name) {
->>>>>>> e2b0f46788d6e1a8873e8a3dcb0bed2bfa54b60b
           if (state) {
             moveRightBlind(loadOpenMiddleAngle(), true);
           } else {
@@ -148,8 +143,6 @@ void startFauxmo()
           }
         }
 
-<<<<<<< HEAD
-=======
         //ALL BLINDS
         if (device_name == blind3.name) {
           if (state) {
@@ -158,8 +151,6 @@ void startFauxmo()
             moveAllBlinds(loadCloseSunAngle(), true);
           }
         }
-
->>>>>>> e2b0f46788d6e1a8873e8a3dcb0bed2bfa54b60b
         //fauxmo.setState(device_id, true, 255);
         // Checking for device_id is simpler if you are certain about the order they are loaded and it does not change.
         // Otherwise comparing the device_name is safer.
