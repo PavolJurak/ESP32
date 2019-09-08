@@ -94,6 +94,8 @@ function refreshRangeElements() {
             var jsonData = JSON.parse(data);
             document.getElementById("LeftBlind").value = jsonData.LeftBlindPosition;
             document.getElementById("RightBlind").value = jsonData.RightBlindPosition;
+            setBlindPercent("Left",jsonData.LeftBlindPosition);
+            setBlindPercent("Right",jsonData.RightBlindPosition);
             console.log("Done", this.status);
         }
         if (this.status != 200) {

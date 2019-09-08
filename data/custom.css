@@ -1,36 +1,66 @@
-.card {
-    margin: 0 auto;
-    float: none;
-    margin-bottom: 10px;
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 
-.card1 {
+#container {
+    position: relative;
+    min-height: 100%;
+}
+
+#body {
+    padding:10px;
+    padding-bottom:60px;   /* Height of the footer */
+}
+
+#footer {
+    position: absolute;
+    bottom: 0px;
+    width:100%;
+    background: #343a40;
+}
+
+.middle {
+    margin: 0 auto;
+}
+
+.card{
     margin-top: 25px;
-    padding: 10px 10px 10px 10px;
+    margin-bottom: 50px;
+    padding: 10px 10px;
     box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+}
+
+.card-table {
+    margin-top: 20px;
+    width: 100%;
+    border-top: 1px solid #dee2e6;
+}
+
+.card-table td {
+    padding: 5px;
+    text-align: left;
+}
+
+.card-table tr:first-child td {
+    padding-top: 20px;
+}
+
+.card-table tr td:first-child {
+    max-width: 100px;
 }
 
 .btn-full-width {
     width: 100%;
 }
 
-
-.table-custom {
-    margin-top: 20px;
-    width: 100%;
-    border-top: 1px solid #dee2e6;
+.custom-file {
+    margin-bottom: 20px;
 }
 
-.table-custom td {
-    padding: 5px;
-}
-
-.table-custom tr:first-child td {
-    padding-top: 20px;
-}
-
-.table-custom tbody {
-    margin-bottom: 10px;
+.copyright {
+  margin-top: 50px;
 }
 
 #LeftBlind {
@@ -57,5 +87,15 @@
 }
 
 .copyright {
-  margin-top: 50px;
+    color: #fff;
+    margin: 10px auto;
+}
+
+.upload-form input, label {
+    margin-bottom: 10px;
+}
+
+.file {
+    text-align: left;
+    width: 100%;
 }

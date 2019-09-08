@@ -6,8 +6,10 @@
 // SERVO CONFIGURATION
 #define MIN_POSITION 5
 #define MAX_POSITION 175
-#define LEFT_SERVO_PIN 5
+
+#define LEFT_SERVO_PIN 16
 #define RIGHT_SERVO_PIN 17
+
 #define MAX_TIME_RUN_SERVO 1500 //ms
 
 //BUTTONS PINS
@@ -18,7 +20,7 @@
 #define BUTTON_DEFAULT_PIN 5
 
 //TRANSISTOR configuration
-//#define TRANSISTOR_PIN
+#define TRANSISTOR_PIN 21
 
 // Radio codes for controling lights
 #define LIGHT_1_ON 5393
@@ -37,6 +39,6 @@
 #define ALL_LIGHTS_BEDROOM_OFF 5493
 
 // Radio pin on ESP32
-#define radio433Pin 5
+#define radio433Pin 7
 #define DELAY_BETWEEN_SEND_RC 200
 #endif

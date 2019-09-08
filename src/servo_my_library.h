@@ -14,13 +14,13 @@ boolean isOpenTransistor = false;
 /*----------------------FUNCTIONS FOR OPEN POWER TO SERVO ----------------*/
 void openTransistor()
 {
-  //digitalWrite(TRANSISTOR_PIN, HIGH);
+  digitalWrite(TRANSISTOR_PIN, HIGH);
   isOpenTransistor = true;
 }
 
 void closeTransistor()
 {
-  //digitalWrite(TRANSISTOR_PIN, LOW);
+  digitalWrite(TRANSISTOR_PIN, LOW);
   isOpenTransistor = false;
 }
 
